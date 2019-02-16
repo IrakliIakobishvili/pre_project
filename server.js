@@ -17,11 +17,6 @@ app.use( morgan('dev') );
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
 
-app.get('/', (req, res )  => {
-    // res.send("Hello Hello");
-    res.sendFile(path.join(__dirname, './src/html', 'register.html'));
-});
-
 // IIFE
 (async () => {
     try {
