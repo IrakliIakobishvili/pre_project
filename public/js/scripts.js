@@ -36,6 +36,26 @@ const Events = {
             console.error(err);
         })
     },
+    loginUser: function() {
+        fetch(`${location.href}login`, {
+            method: "post",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ userDetails:{ 
+                firstName:  document.getElementById('loginEmail').value, 
+                lastName:   document.getElementById('registerLastName').value
+            }})
+        })
+        .then(res => res.json())
+        .then(userApiResult => {
+            console.log(userApiResult);
+        })
+        .catch(err => {
+            console.error(err);
+        })
+    },
     render: function() {
         Events.loadProducts();
     }

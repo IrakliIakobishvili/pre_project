@@ -1,10 +1,12 @@
 import {Router} from "express";
-import {index, store} from './user.controller';
+import {index, store, login} from './user.controller';
 
 const router = new Router();
 // GET /api/user
 router.get('/', index);
 // POST /api/user
 router.post('/', store);
+// LOGIN user
+router.post('/login', login);
 
 export default router;
