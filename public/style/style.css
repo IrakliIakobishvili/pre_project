@@ -116,13 +116,13 @@ span.products-cont__unit {
 .login-form {
     background-color: #F26C4F;
 }
-.form input {
+.form input, .form button {
     width: 100%;
     padding: 15px 10px;
     margin-bottom: 10px;
     border: 2px solid transparent;
 }
-input#registerBtn,#loginBtn {
+#registerBtn,#loginBtn {
     border: none;
     background: #4266b3;
     color: #fff;
@@ -147,4 +147,8 @@ h2.register-heading {
     outline: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.warning {
+    border-color: red !important;
 }

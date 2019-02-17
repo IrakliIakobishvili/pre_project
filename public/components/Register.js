@@ -9,13 +9,31 @@ const Register = {
                 <input type='text' name='email' placeholder='Email' id='registerEmail'>
                 <input type='password' name='password' placeholder='Password' id='registerPassword'>
                 <input type='password' name='confirmPassword' placeholder='Confirm Password' id='registerPassword2'>
-                <input type='submit' value='Register' id='registerBtn'>
-            </div>
+                <button id='registerBtn'>Register</button>
+                </div>
         `;
         let cont = document.getElementById('products');
         cont.innerHTML = form;
         let registerBtn = document.querySelector('#registerBtn');
-        registerBtn.addEventListener('click',Events.registerUserBtnClick);
+        
+        // if () {
+            registerBtn.addEventListener('click',function(){
+                let form = document.getElementById('registerForm');
+                let email = document.getElementById('registerEmail');
+                console.log(registerPassword2)
+                if(General.validateInputs(form,'warning')) {
+                    (!General.validateEmail(email.value)) ? email.classList.add('warning') : email.classList.remove('warning');
+                    if(registerPassword.value !== registerPassword2.value) {
+                        registerPassword.classList.add('warning');  
+                        registerPassword2.classList.add('warning');   
+                    }else {
+                        Events.registerNewUser(form);
+                    }                 
+                    // console.log(true)
+                }
+                // Events.registerNewUser()
+            });
+        // }
     },
     renderRegisterCompany: function(user) {
         let form = `
