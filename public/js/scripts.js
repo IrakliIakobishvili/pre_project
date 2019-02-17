@@ -1,5 +1,5 @@
 const Events = {
-    registerUserBtnClick() {        
+    registerNewUser(formEl) {        
         fetch(`${location.href}api/user`, {
             method: "post",
             headers: {
@@ -15,7 +15,16 @@ const Events = {
                 password2:  document.getElementById('registerPassword2').value
             }})
         })
-        .then(res => res.json())
+        .then(res => {
+            if(res.status == 201) {
+                General.clearInputs(formEl);
+                document.getElementById('registerBtn').innerHTML = 'Done';
+                setTimeout(() => {
+                    document.getElementById('registerBtn').innerHTML = 'Register';
+                }, 2000);
+            }
+            return res.json();
+        })
         .then(userApiResult => {
             console.log(userApiResult);
         })
