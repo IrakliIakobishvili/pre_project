@@ -6,7 +6,7 @@ const router = new Router();
 router.get('/', index);
 // POST /api/user
 router.post('/', store);
-// LOGIN user
+
 router.post('/login', login);
 
 export default router;

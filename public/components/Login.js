@@ -10,29 +10,51 @@ const Login = {
         `;
         let cont = document.getElementById('products');
         cont.innerHTML = form;
-        let loginBtn = document.querySelector('#loginBtn');
+
+        let loginBtn = document.getElementById('loginBtn');
         loginBtn.addEventListener('click',function(){
-            fetch(`${location.href}api/user/login`, {
-                method: "post",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ userDetails:{ 
-                    firstName:  document.getElementById('loginEmail').value, 
-                    lastName:   document.getElementById('loginPassword').value
-                }})
-            })
-            .then(res => res.json())
-            .then(userApiResult => {
-                console.log(userApiResult);
-            })
-            .catch(err => {
-                console.error(err);
-            })
+            let form = document.getElementById('loginForm');
+            let email = document.getElementById('loginEmail');
+            if(General.validateInputs(form,'warning')) {
+                if(General.validateEmail(email.value) == false) {
+                    email.classList.add('warning');
+                }else {
+                    Events.loginUser();
+                }
+            }
         });
     },
     render: function() {
         Login.renderLogin();
     }
 }
+
+
+
+
+
+
+
+
+
+
+// app.post('/user', function (req, res) {
+//     db.User.findOne({
+//          where: {
+//              email: req.body.email
+//                 }
+//     }).then(function (user) {
+//         if (!user) {
+//            res.redirect('/');
+//         } else {
+//     bcrypt.compare(req.body.password, user.password, function (err, result) {
+//         if (result == true) {
+//             res.redirect('/home');
+//         } else {
+//             res.send('Incorrect password');
+//             res.redirect('/');
+//         }
+//         });
+//         }
+//     });
+// });

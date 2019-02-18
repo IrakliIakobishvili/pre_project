@@ -20,6 +20,12 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         trim: true
     },
+    companyName: {
+        type: String
+    },
+    companyID: {
+        type: Number
+    },
     password: {
         type: String,
         required: true

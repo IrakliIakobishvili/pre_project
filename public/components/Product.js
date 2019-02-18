@@ -17,22 +17,22 @@ const Product = {
         
         let productUnit = document.createElement('span');
         productUnit.classList.add('products-cont__unit');
-        productUnit.appendChild(document.createTextNode(`${unit}`));
+        productUnit.appendChild(document.createTextNode(`Unit: (${unit})`));
 
         let productPriceCont = document.createElement('div');
         productPriceCont.classList.add('products-cont__price-cont');
         let productCurrentPrice = document.createElement('span');
-        productCurrentPrice.appendChild(document.createTextNode(currentPrice));
+        productCurrentPrice.appendChild(document.createTextNode(`Price: ${currentPrice}`));
 
         // if(lastPrice !== null) {
             let productLastPrice = document.createElement('span');
-            productLastPrice.appendChild(document.createTextNode(lastPrice));
+            productLastPrice.appendChild(document.createTextNode(`Old price: ${lastPrice}`));
             productPriceCont.appendChild(productLastPrice);
         // }
 
         let salesNumber = document.createElement('span');
         salesNumber.classList.add('products-cont__sales');
-        salesNumber.appendChild(document.createTextNode(Math.floor(Math.random()*(50-5+1)+5)));
+        salesNumber.appendChild(document.createTextNode(`Total sale: ${Math.floor(Math.random()*(50-5+1)+5)}`));
 
         productPriceCont.appendChild(productCurrentPrice);
         
@@ -42,8 +42,6 @@ const Product = {
         productCont.appendChild(productUnit);
         productCont.appendChild(productPriceCont);
         productCont.appendChild(productUnit);
-        // Product.products.appendChild(productCont);
-        // Product.productEl = productCont;
         return productCont;
     },
     render: function(title,currentPrice,lastPrice,unit,imgUrl) {

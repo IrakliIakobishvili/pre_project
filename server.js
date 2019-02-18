@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import { json, urlencoded } from 'express';
 import morgan from "morgan";
 import config from './src/config/index';
@@ -10,11 +11,13 @@ import productRouter from './src/resources/product/product.router';
 import userRouter from './src/resources/user/user.router';
 const app = express();
 
+app.use(cookieParser());
 app.use(express.static("public"));
 app.use(json() )
 app.use( urlencoded({ extended: true}) )
 app.use( morgan('dev') );
 app.use('/api/user', userRouter);
+// app.use('/api/user/login', userRouter);
 app.use('/api/product', productRouter);
 
 // IIFE

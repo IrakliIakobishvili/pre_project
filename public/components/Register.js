@@ -1,74 +1,119 @@
 const Register = {
-    renderRegisterUser: function(user) {
-        let form = `
-            <div id='registerForm' class='register-form form'>
-                <h2 class='register-heading'>Person Registration</h2>
-                <input type='text' name='firstName' placeholder='First Name' id='registerFirstName'>
-                <input type='text' name='lastName' placeholder='Last Name' id='registerLastName'>
-                <input type='text' name='phone' placeholder='Phone' id='registerPhone'>
-                <input type='text' name='email' placeholder='Email' id='registerEmail'>
-                <input type='password' name='password' placeholder='Password' id='registerPassword'>
-                <input type='password' name='confirmPassword' placeholder='Confirm Password' id='registerPassword2'>
-                <button id='registerBtn'>Register</button>
-                </div>
-        `;
+    renderRegisterUser: function(userType) {
+        let form = document.createElement('div');
+        form.classList.add('register-form', 'form');
+        form.setAttribute('id','registerForm');
+
+        let heading = document.createElement('h2');
+        heading.classList.add('register-heading');        
+        heading.innerHTML = 'Person Registration';
+        if(userType == 'company') {
+            heading.innerHTML = 'Company Registration';
+        }else {
+            heading.innerHTML = 'Person Registration';
+        }
+        form.appendChild(heading);
+
+        let firstName = document.createElement('input');
+        firstName.setAttribute('type','text');
+        firstName.setAttribute('name','firstName');
+        firstName.setAttribute('placeholder','First Name');
+        firstName.setAttribute('id','registerFirstName');
+
+        let lastName = document.createElement('input');
+        lastName.setAttribute('type','text');
+        firstName.setAttribute('name','lastName');
+        lastName.setAttribute('placeholder','Last Name');
+        lastName.setAttribute('id','registerLastName');
+
+        let phone = document.createElement('input');
+        phone.setAttribute('type','text');
+        firstName.setAttribute('name','phone');
+        phone.setAttribute('placeholder','Phone');
+        phone.setAttribute('id','registerPhone');
+
+        let email = document.createElement('input');
+        email.setAttribute('type','text');
+        firstName.setAttribute('name','email');
+        email.setAttribute('placeholder','Email');
+        email.setAttribute('id','registerEmail');
+  
+        let compName = document.createElement('input');
+        compName.setAttribute('type','text');
+        firstName.setAttribute('name','companyName');
+        compName.setAttribute('placeholder','Company Name');
+        compName.setAttribute('id','registerCompanyName');
+
+        let compID = document.createElement('input');
+        compID.setAttribute('type','text');
+        firstName.setAttribute('name','companyID');
+        compID.setAttribute('placeholder','Company ID');
+        compID.setAttribute('id','registerCompanyID');
+
+        let password = document.createElement('input');
+        password.setAttribute('type','password');
+        firstName.setAttribute('name','password');
+        password.setAttribute('placeholder','Password');
+        password.setAttribute('id','registerPassword');
+
+        let password2 = document.createElement('input');
+        password2.setAttribute('type','password');
+        firstName.setAttribute('name','password2');
+        password2.setAttribute('placeholder','Confirm Password');
+        password2.setAttribute('id','registerPassword2');
+
+        let button = document.createElement('button');
+        button.innerHTML = 'Register';
+        button.setAttribute('id','registerBtn');
+
+        form.appendChild(firstName);
+        form.appendChild(lastName);
+        form.appendChild(phone);
+        form.appendChild(email);
+        if(userType == 'company') {
+            form.appendChild(compName);
+            form.appendChild(compID);
+        }
+        form.appendChild(password);
+        form.appendChild(password2);
+        form.appendChild(button);
+
         let cont = document.getElementById('products');
-        cont.innerHTML = form;
+        cont.innerHTML = '';
+        cont.appendChild(form);
         let registerBtn = document.querySelector('#registerBtn');
         
-        // if () {
-            registerBtn.addEventListener('click',function(){
-                let form = document.getElementById('registerForm');
-                let email = document.getElementById('registerEmail');
-                console.log(registerPassword2)
-                if(General.validateInputs(form,'warning')) {
-                    (!General.validateEmail(email.value)) ? email.classList.add('warning') : email.classList.remove('warning');
-                    if(registerPassword.value !== registerPassword2.value) {
-                        registerPassword.classList.add('warning');  
-                        registerPassword2.classList.add('warning');   
-                    }else {
-                        Events.registerNewUser(form);
-                    }                 
-                    // console.log(true)
+        registerBtn.addEventListener('click',function(){
+            let form = document.getElementById('registerForm');
+            let email = document.getElementById('registerEmail');
+            // console.log(registerPassword2)
+            if(General.validateInputs(form,'warning')) {
+                (!General.validateEmail(email.value)) ? email.classList.add('warning') : email.classList.remove('warning');
+                if(registerPassword.value !== registerPassword2.value) {
+                    registerPassword.classList.add('warning');  
+                    registerPassword2.classList.add('warning');   
+                }else {
+                    Events.registerNewUser(form,userType);
                 }
-                // Events.registerNewUser()
-            });
-        // }
-    },
-    renderRegisterCompany: function(user) {
-        let form = `
-            <div id='registerForm' class='register-form form'>
-                <h2 class='register-heading'>Company Registration</h2>
-                <input type='text' name='firstName' placeholder='First Name'>
-                <input type='text' name='lastName' placeholder='Last Name'>
-                <input type='text' name='phone' placeholder='Phone'>
-                <input type='text' name='email' placeholder='Email'>
-                <input type='text' name='companyName' placeholder='Company Name'>
-                <input type='text' name='identification' placeholder='ID'>
-                <input type='password' name='password' placeholder='Password'>
-                <input type='password' name='confirmPassword' placeholder='Confirm Password'>
-                <input type='submit' value='Register' id='registerBtn'>
-            </div>
-        `;
-        let cont = document.getElementById('products');
-        cont.innerHTML = form;
+            }
+        });
     },
     renderSwitch: function() {
         let switchForm = `
             <div class='switchForm'>
-                <button id='showUserRegisterForm'>Person</button>
-                <button id='showCompanyRegisterForm'>Company</button>
+                <button data-form='user' id='showUserRegisterForm'>Person</button>
+                <button data-form='company' id='showCompanyRegisterForm'>Company</button>
             </div>
         `;
         let cont = document.getElementById('products');
         cont.innerHTML = switchForm;
         let showRegisterUserFormBtn = document.querySelector('#showUserRegisterForm');
         let showRegisterCompanyFormBtn = document.querySelector('#showCompanyRegisterForm');
-        showRegisterUserFormBtn.addEventListener('click',function(){
-            Register.renderRegisterUser();
-        });
-        showRegisterCompanyFormBtn.addEventListener('click',function(){
-            Register.renderRegisterCompany();
+        [showRegisterUserFormBtn,showRegisterCompanyFormBtn].forEach(function(btn) {
+            btn.addEventListener('click',function(){
+                let targetForm = this.getAttribute('data-form');
+                Register.renderRegisterUser(targetForm);
+            });
         });
     },
     render: function() {
