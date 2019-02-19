@@ -1,7 +1,6 @@
 import {Product} from './product.model';
 export const index = async (req, res) => {
     try {
-        // userDetails => { email : "janoboka@gmail.com", password: "12343434"}
         let products = await Product.find({}).lean().exec();
         return res.status(201).json(products);
     }
@@ -13,11 +12,9 @@ export const index = async (req, res) => {
 
 export const store = async (req, res) => {
     try {
-        // userDetails => { email : "janoboka@gmail.com", password: "12343434"}
-        // console.log(req.body.userDetails);
+        console.log(req.body)
         let product = await Product.create(req.body.productDetails)
         console.log(product);
-        // return res.json(req.body.userDetails)
         return res.status(201).json(product);
     }
     catch(error) {

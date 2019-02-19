@@ -9,21 +9,21 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    unit: {
-        type: String,
-        required: true
-    },
     currentPrice: {
         type: Number,
-        required: true,
+        required: true
     },
     lastPrice: {
         type: Number,
-        required: true
+        required: true,
     },
     sales: {
         type: Number,
         required: true
+    },
+    unit: {
+        type: String,
+        default:'Kg'
     },
 }, { timestamps: true });
 

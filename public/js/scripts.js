@@ -50,6 +50,41 @@ const Events = {
             console.error(err);
         })
     },
+    registerNewProduct(formEl) {
+        fetch(`${location.href}api/product`, {
+            method: "post",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                productDetails:{
+                    name:         document.getElementById('productName').value, 
+                    img:          document.getElementById('productImg').value,
+                    currentPrice: document.getElementById('currentPrice').value,
+                    lastPrice:    document.getElementById('lastPrice').value,
+                    sales:        document.getElementById('sales').value,
+                    unit:         document.getElementById('unit').value
+                }
+            })
+        })
+        .then(res => {
+            if(res.status == 201) {
+                General.clearInputs(formEl);
+                document.getElementById('insertBtn').innerHTML = 'Done';
+                setTimeout(() => {
+                    document.getElementById('insertBtn').innerHTML = 'Register';
+                }, 2000);
+            }
+            return res.json();
+        })
+        .then(userApiResult => {
+            console.log(userApiResult);
+        })
+        .catch(err => {
+            console.error(err);
+        })
+    },
     loadProducts() {
         fetch(`${location.href}api/product`)
         .then(res => res.json())
@@ -75,14 +110,25 @@ const Events = {
                 password:   document.getElementById('loginPassword').value
             })
         })
-        .then(res => res.json())
-        .then(userToken => {
-            console.log(userToken);
-            localStorage.setItem('token',userToken.token);
+        .then(res => {            
+            if(res.status == 200) {
+                Profile.render();
+            }
+            return res.json();
+        })
+        .then(response => {
+            localStorage.setItem('token',response.token); 
+            console.log(response);
         })
         .catch(err => {
             console.error(err);
         })
+    },
+    logout: function(el) {
+        el.addEventListener('click',function(){
+            localStorage.removeItem('token');
+            location.reload(true);
+        });
     },
     render: function() {
         Events.loadProducts();

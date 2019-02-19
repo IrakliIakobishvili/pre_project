@@ -1,6 +1,6 @@
 const Product = {
     // productEl: '',
-    renderProduct: function(title,currentPrice,lastPrice,unit,imgUrl,) {
+    renderProduct: function(title,currentPrice,lastPrice,unit,imgUrl) {
         let productCont = document.createElement('div');
         productCont.classList.add('products-cont');
 

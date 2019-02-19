@@ -94,7 +94,7 @@ h2.products-cont__title {
     text-transform: capitalize;
     margin-left: 220px;
     position: absolute;
-    top: -190px;
+    top: 29px;
 }
 .products-cont__price-cont span {
     display: block;
@@ -124,7 +124,7 @@ span.products-cont__unit {
     margin-bottom: 10px;
     border: 2px solid transparent;
 }
-#registerBtn,#loginBtn {
+#registerBtn,#loginBtn,#insertBtn {
     border: none;
     background: #4266b3;
     color: #fff;
@@ -149,6 +149,16 @@ h2.register-heading {
     outline: none;
     border-radius: 4px;
     cursor: pointer;
+}
+.logout {
+    margin-left: 10px;
+    padding: 10px 17px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #F26C4F;
+    outline: none;
+    border: none;
 }
 
 .warning {

@@ -86,15 +86,18 @@ const Register = {
         registerBtn.addEventListener('click',function(){
             let form = document.getElementById('registerForm');
             let email = document.getElementById('registerEmail');
-            // console.log(registerPassword2)
             if(General.validateInputs(form,'warning')) {
-                (!General.validateEmail(email.value)) ? email.classList.add('warning') : email.classList.remove('warning');
-                if(registerPassword.value !== registerPassword2.value) {
-                    registerPassword.classList.add('warning');  
-                    registerPassword2.classList.add('warning');   
+                if(!General.validateEmail(email.value)) {
+                    email.classList.add('warning');
                 }else {
-                    Events.registerNewUser(form,userType);
-                }
+                    email.classList.remove('warning');
+                    if(registerPassword.value !== registerPassword2.value) {
+                        registerPassword.classList.add('warning');  
+                        registerPassword2.classList.add('warning');   
+                    }else {
+                        Events.registerNewUser(form,userType);
+                    }
+                }                
             }
         });
     },
